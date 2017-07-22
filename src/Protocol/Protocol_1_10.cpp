@@ -321,8 +321,8 @@ void cProtocol_1_10_0::HandlePacketStatusRequest(cByteBuffer & a_ByteBuffer)
 {
 	cServer * Server = cRoot::Get()->GetServer();
 	AString ServerDescription = Server->GetDescription();
-	int NumPlayers = Server->GetNumPlayers();
-	int MaxPlayers = Server->GetMaxPlayers();
+	auto NumPlayers = Server->GetNumPlayers();
+	auto MaxPlayers = Server->GetMaxPlayers();
 	AString Favicon = Server->GetFaviconData();
 	cRoot::Get()->GetPluginManager()->CallHookServerPing(*m_Client, ServerDescription, NumPlayers, MaxPlayers, Favicon);
 
@@ -333,8 +333,8 @@ void cProtocol_1_10_0::HandlePacketStatusRequest(cByteBuffer & a_ByteBuffer)
 
 	// Players:
 	Json::Value Players;
-	Players["online"] = NumPlayers;
-	Players["max"] = MaxPlayers;
+	Players["online"] = static_cast<unsigned>(NumPlayers);
+	Players["max"] = static_cast<unsigned>(MaxPlayers);
 	// TODO: Add "sample"
 
 	// Description:

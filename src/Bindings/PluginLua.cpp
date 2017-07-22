@@ -833,7 +833,7 @@ bool cPluginLua::OnProjectileHitEntity(cProjectileEntity & a_Projectile, cEntity
 
 
 
-bool cPluginLua::OnServerPing(cClientHandle & a_ClientHandle, AString & a_ServerDescription, int & a_OnlinePlayersCount, int & a_MaxPlayersCount, AString & a_Favicon)
+bool cPluginLua::OnServerPing(cClientHandle & a_ClientHandle, AString & a_ServerDescription, size_t & a_OnlinePlayersCount, size_t & a_MaxPlayersCount, AString & a_Favicon)
 {
 	cOperation op(*this);
 	if (!op().IsValid())

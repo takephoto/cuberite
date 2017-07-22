@@ -1320,7 +1320,7 @@ bool cPluginManager::CallHookProjectileHitEntity(cProjectileEntity & a_Projectil
 
 
 
-bool cPluginManager::CallHookServerPing(cClientHandle & a_ClientHandle, AString & a_ServerDescription, int & a_OnlinePlayersCount, int & a_MaxPlayersCount, AString & a_Favicon)
+bool cPluginManager::CallHookServerPing(cClientHandle & a_ClientHandle, AString & a_ServerDescription, size_t & a_OnlinePlayersCount, size_t & a_MaxPlayersCount, AString & a_Favicon)
 {
 	FIND_HOOK(HOOK_SERVER_PING);
 	VERIFY_HOOK;

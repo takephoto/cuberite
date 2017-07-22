@@ -627,6 +627,7 @@ public:
 	void Push(cLuaUDPEndpoint * a_UDPEndpoint);
 	void Push(double a_Value);
 	void Push(int a_Value);
+	void Push(size_t a_Value);
 	void Push(long a_Value);
 	void Push(const UInt32 a_Value);
 	void Push(std::chrono::milliseconds a_time);

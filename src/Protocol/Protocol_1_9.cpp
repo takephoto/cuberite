@@ -656,7 +656,7 @@ void cProtocol_1_9_0::SendLogin(const cPlayer & a_Player, const cWorld & a_World
 		Pkt.WriteBEUInt8(static_cast<UInt8>(a_Player.GetEffectiveGameMode()) | (Server->IsHardcore() ? 0x08 : 0));  // Hardcore flag bit 4
 		Pkt.WriteBEInt8(static_cast<Int8>(a_World.GetDimension()));
 		Pkt.WriteBEUInt8(2);  // TODO: Difficulty (set to Normal)
-		Pkt.WriteBEUInt8(static_cast<UInt8>(Clamp<int>(Server->GetMaxPlayers(), 0, 255)));
+		Pkt.WriteBEUInt8(static_cast<UInt8>(Clamp<size_t>(Server->GetMaxPlayers(), 0, 255)));
 		Pkt.WriteString("default");  // Level type - wtf?
 		Pkt.WriteBool(false);  // Reduced Debug Info - wtf?
 	}
@@ -2135,8 +2135,8 @@ void cProtocol_1_9_0::HandlePacketStatusRequest(cByteBuffer & a_ByteBuffer)
 {
 	cServer * Server = cRoot::Get()->GetServer();
 	AString ServerDescription = Server->GetDescription();
-	int NumPlayers = Server->GetNumPlayers();
-	int MaxPlayers = Server->GetMaxPlayers();
+	auto NumPlayers = Server->GetNumPlayers();
+	auto MaxPlayers = Server->GetMaxPlayers();
 	AString Favicon = Server->GetFaviconData();
 	cRoot::Get()->GetPluginManager()->CallHookServerPing(*m_Client, ServerDescription, NumPlayers, MaxPlayers, Favicon);
 
@@ -2147,8 +2147,8 @@ void cProtocol_1_9_0::HandlePacketStatusRequest(cByteBuffer & a_ByteBuffer)
 
 	// Players:
 	Json::Value Players;
-	Players["online"] = NumPlayers;
-	Players["max"] = MaxPlayers;
+	Players["online"] = static_cast<unsigned>(NumPlayers);
+	Players["max"] = static_cast<unsigned>(MaxPlayers);
 	// TODO: Add "sample"
 
 	// Description:
@@ -4110,7 +4110,7 @@ void cProtocol_1_9_1::SendLogin(const cPlayer & a_Player, const cWorld & a_World
 		Pkt.WriteBEUInt8(static_cast<UInt8>(a_Player.GetEffectiveGameMode()) | (Server->IsHardcore() ? 0x08 : 0));  // Hardcore flag bit 4
 		Pkt.WriteBEInt32(static_cast<Int32>(a_World.GetDimension()));
 		Pkt.WriteBEUInt8(2);  // TODO: Difficulty (set to Normal)
-		Pkt.WriteBEUInt8(static_cast<UInt8>(Clamp<int>(Server->GetMaxPlayers(), 0, 255)));
+		Pkt.WriteBEUInt8(static_cast<UInt8>(Clamp<size_t>(Server->GetMaxPlayers(), 0, 255)));
 		Pkt.WriteString("default");  // Level type - wtf?
 		Pkt.WriteBool(false);  // Reduced Debug Info - wtf?
 	}
@@ -4139,8 +4139,8 @@ void cProtocol_1_9_1::HandlePacketStatusRequest(cByteBuffer & a_ByteBuffer)
 {
 	cServer * Server = cRoot::Get()->GetServer();
 	AString ServerDescription = Server->GetDescription();
-	int NumPlayers = Server->GetNumPlayers();
-	int MaxPlayers = Server->GetMaxPlayers();
+	auto NumPlayers = Server->GetNumPlayers();
+	auto MaxPlayers = Server->GetMaxPlayers();
 	AString Favicon = Server->GetFaviconData();
 	cRoot::Get()->GetPluginManager()->CallHookServerPing(*m_Client, ServerDescription, NumPlayers, MaxPlayers, Favicon);
 
@@ -4151,8 +4151,8 @@ void cProtocol_1_9_1::HandlePacketStatusRequest(cByteBuffer & a_ByteBuffer)
 
 	// Players:
 	Json::Value Players;
-	Players["online"] = NumPlayers;
-	Players["max"] = MaxPlayers;
+	Players["online"] = static_cast<unsigned>(NumPlayers);
+	Players["max"] = static_cast<unsigned>(MaxPlayers);
 	// TODO: Add "sample"
 
 	// Description:
@@ -4196,8 +4196,8 @@ void cProtocol_1_9_2::HandlePacketStatusRequest(cByteBuffer & a_ByteBuffer)
 {
 	cServer * Server = cRoot::Get()->GetServer();
 	AString ServerDescription = Server->GetDescription();
-	int NumPlayers = Server->GetNumPlayers();
-	int MaxPlayers = Server->GetMaxPlayers();
+	auto NumPlayers = Server->GetNumPlayers();
+	auto MaxPlayers = Server->GetMaxPlayers();
 	AString Favicon = Server->GetFaviconData();
 	cRoot::Get()->GetPluginManager()->CallHookServerPing(*m_Client, ServerDescription, NumPlayers, MaxPlayers, Favicon);
 
@@ -4208,8 +4208,8 @@ void cProtocol_1_9_2::HandlePacketStatusRequest(cByteBuffer & a_ByteBuffer)
 
 	// Players:
 	Json::Value Players;
-	Players["online"] = NumPlayers;
-	Players["max"] = MaxPlayers;
+	Players["online"] = static_cast<unsigned>(NumPlayers);
+	Players["max"] = static_cast<unsigned>(MaxPlayers);
 	// TODO: Add "sample"
 
 	// Description:
@@ -4253,8 +4253,8 @@ void cProtocol_1_9_4::HandlePacketStatusRequest(cByteBuffer & a_ByteBuffer)
 {
 	cServer * Server = cRoot::Get()->GetServer();
 	AString ServerDescription = Server->GetDescription();
-	int NumPlayers = Server->GetNumPlayers();
-	int MaxPlayers = Server->GetMaxPlayers();
+	auto NumPlayers = Server->GetNumPlayers();
+	auto MaxPlayers = Server->GetMaxPlayers();
 	AString Favicon = Server->GetFaviconData();
 	cRoot::Get()->GetPluginManager()->CallHookServerPing(*m_Client, ServerDescription, NumPlayers, MaxPlayers, Favicon);
 
@@ -4265,8 +4265,8 @@ void cProtocol_1_9_4::HandlePacketStatusRequest(cByteBuffer & a_ByteBuffer)
 
 	// Players:
 	Json::Value Players;
-	Players["online"] = NumPlayers;
-	Players["max"] = MaxPlayers;
+	Players["online"] = static_cast<unsigned>(NumPlayers);
+	Players["max"] = static_cast<unsigned>(MaxPlayers);
 	// TODO: Add "sample"
 
 	// Description:
